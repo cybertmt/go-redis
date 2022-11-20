@@ -1,0 +1,48 @@
+sudo apt update
+sudo apt install redis-server
+
+nano /etc/redis/redis.conf
+
+bind 0.0.0.0
+supervised systemd
+
+systemctl enable redis-server
+systemctl restart redis-server
+
+systemctl status redis-server
+
+ss -plnt4
+
+redis-cli ping
+redis-cli ping "Hello Redis"
+
+
+--in cfg---
+requirepass CyberRedisPasswd
+
+# rename-command COMMAND "CUSTOM"
+rename-command FLUSHALL "DELITALL"
+rename-command CONFIG "MYSERVERCONF"
+
+
+-----
+systemctl restart redis-server
+
+redis-cli -h 127.0.0.1 -p 6379
+
+ping
+ping "Hello Redis"
+
+AUTH CyberRedisPasswd
+
+
+FLUSHALL
+CONFIG
+
+SET Name "Cyber Labs"
+SET Blog "Howtoforge.com"
+
+Keys *
+
+
+DELITALL
