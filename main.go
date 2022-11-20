@@ -1,10 +1,9 @@
 package main
 
 import (
-	"fmt"
-
 	"encoding/json"
 	c "goredis/constants"
+	"log"
 
 	"github.com/go-redis/redis"
 )
@@ -23,16 +22,16 @@ func main() {
 
 	json, err := json.Marshal(Author{Name: "Elliot", Age: 35})
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 
 	err = client.Set("id1234", json, 0).Err()
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	val, err := client.Get("id1234").Result()
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
-	fmt.Println(val)
+	log.Println(val)
 }
